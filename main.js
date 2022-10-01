@@ -44,6 +44,7 @@ let acceptData = () => {
     createTasks();
 }
 
+// create Tasks
 let createTasks = () => {
     tasks.innerHTML = "";
     data.map((x, y) => {
@@ -59,11 +60,21 @@ let createTasks = () => {
                 </span>
             </div>
         `) 
-    })
+    });
+    resetForm();
 }
 
+// Form Reset 
 let resetForm = () => {
     textInput.value = "";
     dateInput.value = "";
     textarea.value = "";
 }
+
+// Delete Task 
+let deleteTask = (e) => {
+    e.parentElement.parentElement.remove();
+    data.splice(e.parentElement.parentElement.id, 1);
+    localStorage.setItem("data", JSON.stringify(data));
+    console.log(data);
+};
