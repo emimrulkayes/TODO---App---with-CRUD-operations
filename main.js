@@ -41,6 +41,7 @@ let acceptData = () => {
     });
     localStorage.setItem("data", JSON.stringify(data));
     console.log(data);
+
     createTasks();
 }
 
@@ -59,8 +60,9 @@ let createTasks = () => {
                 <i onClick ="deleteTask(this);createTasks()" class="fas fa-trash-alt"></i>
                 </span>
             </div>
-        `) 
+        `);
     });
+
     resetForm();
 }
 
@@ -78,3 +80,20 @@ let deleteTask = (e) => {
     localStorage.setItem("data", JSON.stringify(data));
     console.log(data);
 };
+
+// Update data form
+let updateTask = (e) => {
+    let selectedTask = e.parentElement.parentElement;
+    textInput.value = selectedTask.children[0].innerHTML;
+    dateInput.value = selectedTask.children[1].innerHTML;
+    textarea.value = selectedTask.children[2].innerHTML;
+
+    deleteTask(e);
+}
+
+(() => {
+    data = JSON.parse(localStorage.getItem("data")) || [];
+    console.log(data);
+
+    createTasks();
+});
